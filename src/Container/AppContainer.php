@@ -56,8 +56,7 @@ class AppContainer
         $dependencies = [];
 
         foreach ($parameters as $parameter) {
-            $dependency = $parameter->getClass();
-
+            $dependency = $parameter->getType()->getName();
             if ($dependency === NULL) {
                 if ($parameter->isDefaultValueAvailable()) {
                     $dependencies[] = $parameter->getDefaultValue();
@@ -65,7 +64,7 @@ class AppContainer
                     throw new ContainerException("Dependency class can not be resolved: {$parameter->name}");
                 }
             } else {
-                $dependencies[] = $this->make($dependency->name);
+                $dependencies[] = $this->make($dependency);
             }
         }
 

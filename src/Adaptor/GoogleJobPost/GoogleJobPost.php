@@ -137,7 +137,8 @@ class GoogleJobPost extends JobPost implements AdaptorInterface
         $this->hiringOrganization = [
             "@type" => "Organization",
             "name" => $value['name'],
-            "sameAs" => $value['sameAs']
+            "sameAs" => $value['sameAs'],
+            "logo" => $value['logo'] ?? ''
         ];
 
         return $this;
@@ -215,7 +216,7 @@ class GoogleJobPost extends JobPost implements AdaptorInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $this->passRequiredProperties($this);
 

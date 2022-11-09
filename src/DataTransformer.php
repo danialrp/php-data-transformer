@@ -3,7 +3,6 @@
 namespace DanialPanah\DataTransformer;
 
 use DanialPanah\DataTransformer\Container\AppContainer;
-use DanialPanah\DataTransformer\Exceptions\NotFoundException;
 
 /**
  * @property string title
@@ -41,23 +40,22 @@ class DataTransformer
 
     public function __set($attribute, $value)
     {
+        $this->$attribute = $value;
+
         $transformerMethods = get_class_methods($this->transformer);
         $transformerSetter = 'set' . ucfirst($attribute);
 
         if (in_array($transformerSetter, $transformerMethods)) {
-            $this->transformer->$transformerSetter($value);
+            $this->transformer->$transformerSetter($this->$attribute);
             return;
         }
 
-        $this->transformer->$attribute = $value;
+        $this->transformer->$attribute = $this->$attribute;
     }
 
     public function __get($attribute)
     {
-        if (isset($this->transformer->$attribute))
-            return $this->transformer->$attribute;
-        else
-            throw new NotFoundException("'{$attribute}' property doesn't exists in this context.");
+        return $this->transformer->$attribute;
     }
 
     public function formatToArray(): array
