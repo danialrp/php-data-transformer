@@ -1,0 +1,26 @@
+{
+  "name": "danialpanah/data-transformer",
+  "description": "A data adaptor for transforming to structured embedding data in job post services.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Danial Panah",
+      "email": "me@danialrp.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DanialPanah\\DataTransformer\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DanialPanah\\DataTransformer\\Tests\\": "tests"
+    }
+  },
+  "require": {
+    "php": "^8.0.2"
+  },
+  "require-dev": {}
+}
