@@ -40,17 +40,15 @@ class DataTransformer
 
     public function __set($attribute, $value)
     {
-        $this->$attribute = $value;
-
         $transformerMethods = get_class_methods($this->transformer);
         $transformerSetter = 'set' . ucfirst($attribute);
 
         if (in_array($transformerSetter, $transformerMethods)) {
-            $this->transformer->$transformerSetter($this->$attribute);
+            $this->transformer->$transformerSetter($value);
             return;
         }
 
-        $this->transformer->$attribute = $this->$attribute;
+        $this->transformer->$attribute = $value;
     }
 
     public function __get($attribute)
